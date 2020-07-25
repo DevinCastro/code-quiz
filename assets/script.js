@@ -26,7 +26,6 @@ let answers = {
 userChoices = []
 
 // delete this later
-console.log(answers.answer1)
 
 
 
@@ -101,6 +100,73 @@ document.addEventListener('click', event => {
     })
   }
 })
+
+
+
+
+
+
+// now set an event listener to the entire page
+document.addEventListener('click', event => {
+  // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
+  if (event.target.classList.contains('wrongChoice')) {
+    console.log("wrong")
+
+    // reset the answers element
+    document.getElementById('answers').innerHTML = ``
+    // remove the questions from the page
+    // display wrong and present the 'next' button
+    document.getElementById('rightWrong').innerHTML = `
+    WRONG
+    `
+    // add the next button into the 'next' element
+    document.getElementById('next').innerHTML = `
+    <button id="next">Next</button>    
+    `
+
+    // start the next question
+    document.getElementById('next').addEventListener('click', event => {
+      document.getElementById('question').innerHTML = `
+        ${questions.question3}
+        `
+      document.getElementById('answers').innerHTML = `
+        <li class="rightChoice">A: ${answers.answer3.a}</li>
+        <li class="wrongChoice">B: ${answers.answer3.b}</li>
+        <li class="wrongChoice">C: ${answers.answer3.c}</li>
+        `
+    })
+  } else if (event.target.classList.contains('rightChoice')) {
+    console.log('right')
+    // reset the answers element
+    document.getElementById('answers').innerHTML = ``
+    // remove the questions from the page
+    // display wrong and present the 'next' button
+    document.getElementById('rightWrong').innerHTML = `
+    CORRECT!
+    `
+    // add the next button into the 'next' element
+    document.getElementById('next').innerHTML = `
+    <button id="next">Next</button>    
+    `
+
+    // start the next question
+    document.getElementById('next').addEventListener('click', event => {
+      document.getElementById('question').innerHTML = `
+        ${questions.question3}
+        `
+      document.getElementById('answers').innerHTML = `
+        <li class="rightChoice">A: ${answers.answer3.a}</li>
+        <li class="wrongChoice">B: ${answers.answer3.b}</li>
+        <li class="wrongChoice">C: ${answers.answer3.c}</li>
+        `
+    })
+  }
+})
+
+
+
+
+
 
 
 
