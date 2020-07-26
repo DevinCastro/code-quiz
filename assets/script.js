@@ -30,7 +30,8 @@ localStorage.setItem('userChoices', JSON.stringify(userChoices))
 
 let score = 0
 let count = 15
-let myInterval = 0
+let myInterval
+
 
 
 
@@ -38,26 +39,42 @@ let myInterval = 0
 document.getElementById('start').addEventListener('click', event => {
   event.preventDefault()
 
+  
 
   // lets try some time stuff
   // this will run the function every interval on miliseconds
   // interval to decrement amount of time by each one second
   myInterval = setInterval(() => {
-
+    console.log(count)
     // displays time left on screen
+    count--
     document.getElementById('count').textContent = `
     ${count} Seconds
     `
     // moves count down by 1
-    count--
+    if (count <= 0) {
 
+      console.log('works')
+      clearInterval(myInterval)
+
+
+
+      document.getElementById('count').innerHTML = ``
+
+      document.getElementById('question').innerHTML = `
+      finished
+      `
+      document.getElementById('answers').innerHTML = `
+      Great job! Your score is: ${score}
+      `
+    }
   }, 1000)
+
+ 
 
   document.getElementById('count').textContent = `
     ${count} Seconds
     `
-
-
   document.getElementById('intro').innerHTML = ``
 
   // fill the question element with the following HTML
@@ -72,8 +89,11 @@ document.getElementById('start').addEventListener('click', event => {
   `
 })
 
+
+
 // now set an event listener to the entire page
 document.addEventListener('click', event => {
+
 
   // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
   if (event.target.classList.contains('wrongChoice')) {
@@ -141,6 +161,8 @@ document.addEventListener('click', event => {
   // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
   if (event.target.classList.contains('wrongChoice1')) {
     console.log('wrong1')
+
+    count = count - 10
 
     document.getElementById('answers').innerHTML = `
     WRONG
@@ -232,6 +254,7 @@ document.addEventListener('click', event => {
 
     // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
     if (count <= 0) {
+      
       console.log('works')
       clearInterval(myInterval)
     
@@ -255,13 +278,13 @@ document.addEventListener('click', event => {
 })
 
 
+console.log(count)
 
 
 
 
 
-
-
+ 
 // later we will need to add local storage to store the answers
 
 // somehow we need to store correct answers
