@@ -24,14 +24,56 @@ let answers = {
 }
 
 userChoices = []
-
+localStorage.setItem('userChoices', JSON.stringify(userChoices))
 // delete this later
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let count = 90
+let myInterval = 0
 
 
 // when we click the start button, this event listener starts
 document.getElementById('start').addEventListener('click', event => {
   event.preventDefault()
+
+
+  // lets try some time stuff
+  // this will run the function every interval on miliseconds
+  // interval to decrement amount of time by each one second
+  myInterval = setInterval(() => {
+
+    // moves count down by 1
+    count--
+    // displays time left on screen
+    document.getElementById('count').textContent = `
+      ${count} Seconds
+      `
+
+  }, 1000)
+
+
+
+
   // fill the question element with the following HTML
   document.getElementById('question').innerHTML = `
     ${questions.question1}
@@ -46,20 +88,23 @@ document.getElementById('start').addEventListener('click', event => {
 
 // now set an event listener to the entire page
 document.addEventListener('click', event => {
+
   // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
   if (event.target.classList.contains('wrongChoice')) {
     console.log("wrong")
 
+    // decrement the time left by 10 seconds if there is a wrong answer
+    count = count - 10
+
+    event.target.dataset.wrong = 'wrong'
+    userChoices.push(event.target.dataset.wrong)
+    localStorage.setItem('userChoices', JSON.stringify(userChoices))
+
+
     // reset the answers element
-    document.getElementById('answers').innerHTML = ``
-    // remove the questions from the page
-    // display wrong and present the 'next' button
-    document.getElementById('rightWrong').innerHTML = `
+    document.getElementById('answers').innerHTML = `
     WRONG
-    `
-    // add the next button into the 'next' element
-    document.getElementById('next').innerHTML = `
-    <button id="next">Next</button>    
+    <button id="next">Next</button>   
     `
 
     // start the next question
@@ -68,23 +113,25 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice">A: ${answers.answer2.a}</li>
-        <li class="wrongChoice">B: ${answers.answer2.b}</li>
-        <li class="wrongChoice">C: ${answers.answer2.c}</li>
+        <li class="rightChoice1">A: ${answers.answer2.a}</li>
+        <li class="wrongChoice1">B: ${answers.answer2.b}</li>
+        <li class="wrongChoice1">C: ${answers.answer2.c}</li>
         `
     })
   } else if (event.target.classList.contains('rightChoice')) {
     console.log('right')
     // reset the answers element
-    document.getElementById('answers').innerHTML = ``
-    // remove the questions from the page
-    // display wrong and present the 'next' button
-    document.getElementById('rightWrong').innerHTML = `
+
+
+    event.target.dataset.correct = 'correct'
+    userChoices.push(event.target.dataset.correct)
+    localStorage.setItem('userChoices', JSON.stringify(userChoices))
+
+
+
+    document.getElementById('answers').innerHTML = `
     CORRECT!
-    `
-    // add the next button into the 'next' element
-    document.getElementById('next').innerHTML = `
-    <button id="next">Next</button>    
+    <button id="next">Next</button> 
     `
 
     // start the next question
@@ -93,78 +140,88 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice">A: ${answers.answer2.a}</li>
-        <li class="wrongChoice">B: ${answers.answer2.b}</li>
-        <li class="wrongChoice">C: ${answers.answer2.c}</li>
+        <li class="rightChoice1">A: ${answers.answer2.a}</li>
+        <li class="wrongChoice1">B: ${answers.answer2.b}</li>
+        <li class="wrongChoice1">C: ${answers.answer2.c}</li>
         `
     })
   }
 })
-
-
-
 
 
 
 // now set an event listener to the entire page
 document.addEventListener('click', event => {
   // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
-  if (event.target.classList.contains('wrongChoice')) {
-    console.log("wrong")
+  if (event.target.classList.contains('wrongChoice1')) {
+    console.log('wrong1')
 
-    // reset the answers element
-    document.getElementById('answers').innerHTML = ``
-    // remove the questions from the page
-    // display wrong and present the 'next' button
-    document.getElementById('rightWrong').innerHTML = `
+    document.getElementById('answers').innerHTML = `
     WRONG
-    `
-    // add the next button into the 'next' element
-    document.getElementById('next').innerHTML = `
-    <button id="next">Next</button>    
+    <button id="next1">Next</button>   
     `
 
     // start the next question
-    document.getElementById('next').addEventListener('click', event => {
+    document.getElementById('next1').addEventListener('click', event => {
       document.getElementById('question').innerHTML = `
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice">A: ${answers.answer3.a}</li>
-        <li class="wrongChoice">B: ${answers.answer3.b}</li>
-        <li class="wrongChoice">C: ${answers.answer3.c}</li>
+        <li class="rightChoice2">A: ${answers.answer3.a}</li>
+        <li class="wrongChoice2">B: ${answers.answer3.b}</li>
+        <li class="wrongChoice2">C: ${answers.answer3.c}</li>
         `
     })
-  } else if (event.target.classList.contains('rightChoice')) {
-    console.log('right')
+  } else if (event.target.classList.contains('rightChoice1')) {
+    console.log('right1')
     // reset the answers element
-    document.getElementById('answers').innerHTML = ``
-    // remove the questions from the page
-    // display wrong and present the 'next' button
-    document.getElementById('rightWrong').innerHTML = `
+    document.getElementById('answers').innerHTML = `
     CORRECT!
-    `
-    // add the next button into the 'next' element
-    document.getElementById('next').innerHTML = `
-    <button id="next">Next</button>    
+    <button id="next1">Next</button> 
     `
 
     // start the next question
-    document.getElementById('next').addEventListener('click', event => {
+    document.getElementById('next1').addEventListener('click', event => {
       document.getElementById('question').innerHTML = `
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice">A: ${answers.answer3.a}</li>
-        <li class="wrongChoice">B: ${answers.answer3.b}</li>
-        <li class="wrongChoice">C: ${answers.answer3.c}</li>
+        <li class="rightChoice2">A: ${answers.answer3.a}</li>
+        <li class="wrongChoice2">B: ${answers.answer3.b}</li>
+        <li class="wrongChoice2">C: ${answers.answer3.c}</li>
         `
     })
   }
 })
 
 
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('wrongChoice2' || 'rightChoice2')) {
 
+    count = 0
+    // if we are out of time we run this
+    if (count <= 0) {
+      console.log('works')
+      clearInterval(myInterval)
+    }
+
+
+    document.getElementById('count').innerHTML = ``
+
+
+    document.getElementById('question').innerHTML = `
+  finished
+  `
+
+    document.getElementById('answers').innerHTML = `
+  
+  `
+
+
+  }
+
+
+})
 
 
 
