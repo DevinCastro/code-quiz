@@ -28,28 +28,10 @@ localStorage.setItem('userChoices', JSON.stringify(userChoices))
 // delete this later
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let count = 90
+let score = 0
+let count = 15
 let myInterval = 0
+
 
 
 // when we click the start button, this event listener starts
@@ -62,17 +44,21 @@ document.getElementById('start').addEventListener('click', event => {
   // interval to decrement amount of time by each one second
   myInterval = setInterval(() => {
 
-    // moves count down by 1
-    count--
     // displays time left on screen
     document.getElementById('count').textContent = `
-      ${count} Seconds
-      `
+    ${count} Seconds
+    `
+    // moves count down by 1
+    count--
 
   }, 1000)
 
+  document.getElementById('count').textContent = `
+    ${count} Seconds
+    `
 
 
+  document.getElementById('intro').innerHTML = ``
 
   // fill the question element with the following HTML
   document.getElementById('question').innerHTML = `
@@ -161,6 +147,11 @@ document.addEventListener('click', event => {
     <button id="next1">Next</button>   
     `
 
+    event.target.dataset.wrong = 'wrong'
+    userChoices.push(event.target.dataset.wrong)
+    localStorage.setItem('userChoices', JSON.stringify(userChoices))
+
+
     // start the next question
     document.getElementById('next1').addEventListener('click', event => {
       document.getElementById('question').innerHTML = `
@@ -180,6 +171,11 @@ document.addEventListener('click', event => {
     <button id="next1">Next</button> 
     `
 
+    event.target.dataset.correct = 'correct'
+    userChoices.push(event.target.dataset.correct)
+    localStorage.setItem('userChoices', JSON.stringify(userChoices))
+
+
     // start the next question
     document.getElementById('next1').addEventListener('click', event => {
       document.getElementById('question').innerHTML = `
@@ -195,30 +191,65 @@ document.addEventListener('click', event => {
 })
 
 
+
+
+
+
 document.addEventListener('click', event => {
-  if (event.target.classList.contains('wrongChoice2' || 'rightChoice2')) {
+
+  if (event.target.classList.contains('wrongChoice2')) {
+    console.log('wrong2')
+
+    event.target.dataset.wrong = 'wrong'
+    userChoices.push(event.target.dataset.wrong)
+    localStorage.setItem('userChoices', JSON.stringify(userChoices))
+
+
+  } else if (event.target.classList.contains('rightChoice2')) {
+    console.log('right2')
+    // reset the answers element
+
+    event.target.dataset.correct = 'correct'
+    userChoices.push(event.target.dataset.correct)
+    localStorage.setItem('userChoices', JSON.stringify(userChoices))
+
+  }
+
+
+  // This will finish the quiz 
+  if (event.target.classList.contains('wrongChoice2') || event.target.classList.contains('rightChoice2')) {
+
+    for (i = 0; i < userChoices.length; i++) {
+
+      if (userChoices[i] === 'correct') {
+        score = score + 100
+      }
+
+    }
 
     count = 0
     // if we are out of time we run this
+
+    // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
     if (count <= 0) {
       console.log('works')
       clearInterval(myInterval)
+    
+    
+    
+      document.getElementById('count').innerHTML = ``
+    
+      document.getElementById('question').innerHTML = `
+      finished
+      `
+      document.getElementById('answers').innerHTML = `
+      Great job! Your score is: ${score}
+      `
     }
 
-
-    document.getElementById('count').innerHTML = ``
-
-
-    document.getElementById('question').innerHTML = `
-  finished
-  `
-
-    document.getElementById('answers').innerHTML = `
-  
-  `
-
-
   }
+  
+
 
 
 })
