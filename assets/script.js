@@ -1,27 +1,30 @@
 // first lets populate a question and some answers
 
 let questions = {
-  question1: 'what is your name?',
-  question2: 'how old are you?',
-  question3: 'Do you code?',
+  question1: '1. What is the HTML tag under which one can write the JavaScript code?',
+  question2: '2. Which of the following is the correct syntax to display “GeeksforGeeks” in an alert box using JavaScript?',
+  question3: '3. JavaScript is a ___ -side programming language.',
 }
 
 
 let answers = {
   answer1: {
-    a: 'Devin',
-    b: 'Maya',
-    c: 'Christy',
+    a: 'javascript',
+    b: 'scripted',
+    c: 'script',
+    d: 'js',
   },
   answer2: {
-    a: '27',
-    b: '26',
-    c: '22',
+    a: 'alertbox(“GeeksforGeeks”);',
+    b: 'msg(“GeeksforGeeks”);',
+    c: 'msgbox(“GeeksforGeeks”);',
+    d: 'alert(“GeeksforGeeks”);',
   },
   answer3: {
-    a: 'yes',
-    b: 'no',
-    c: 'Maybe',
+    a: 'Client',
+    b: 'Server',
+    c: 'Both',
+    d: 'None',
   },
 }
 
@@ -31,23 +34,10 @@ localStorage.setItem('userChoices', JSON.stringify(userChoices))
 
 
 let score = 0
-let count = 15
+let count = 60
 let myInterval
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// =============================================
 
 
 // when we click the start button, this event listener starts
@@ -55,8 +45,6 @@ document.getElementById('start').addEventListener('click', event => {
   // event.preventDefault()
 
 
-
-  // lets try some time stuff
   // this will run the function every interval on miliseconds
   // interval to decrement amount of time by each one second
   myInterval = setInterval(() => {
@@ -77,7 +65,7 @@ document.getElementById('start').addEventListener('click', event => {
       document.getElementById('count').innerHTML = ``
 
       document.getElementById('question').innerHTML = `
-      finished
+      All Finished!
       `
       document.getElementById('answers').innerHTML = `
       Great job! Your score is: ${score}
@@ -87,7 +75,6 @@ document.getElementById('start').addEventListener('click', event => {
 
     }
   }, 1000)
-
 
 
   document.getElementById('count').textContent = `
@@ -101,13 +88,14 @@ document.getElementById('start').addEventListener('click', event => {
   `
   // fill the answers element with the following html
   document.getElementById('answers').innerHTML = `
-      <button class="rightChoice">A: ${answers.answer1.a}</button>
+      <button class="wrongChoice">A: ${answers.answer1.a}</button>
       <button class="wrongChoice">B: ${answers.answer1.b}</button>
-      <button class="wrongChoice">C: ${answers.answer1.c}</button>
+      <button class="rightChoice">C: ${answers.answer1.c}</button>
+      <button class="wrongChoice">D: ${answers.answer1.d}</button>
   `
 })
 
-
+// =============================================
 
 // now set an event listener to the entire page
 document.addEventListener('click', event => {
@@ -137,9 +125,10 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="rightChoice1">A: ${answers.answer2.a}</button>
+        <button class="wrongChoice1">A: ${answers.answer2.a}</button>
         <button class="wrongChoice1">B: ${answers.answer2.b}</button>
         <button class="wrongChoice1">C: ${answers.answer2.c}</button>
+        <button class="rightChoice1">D: ${answers.answer2.d}</button>
         `
     })
   } else if (event.target.classList.contains('rightChoice')) {
@@ -164,15 +153,16 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="rightChoice1">A: ${answers.answer2.a}</button>
+        <button class="wrongChoice1">A: ${answers.answer2.a}</button>
         <button class="wrongChoice1">B: ${answers.answer2.b}</button>
         <button class="wrongChoice1">C: ${answers.answer2.c}</button>
+        <button class="rightChoice1">D: ${answers.answer2.d}</button>
         `
     })
   }
 })
 
-
+// =============================================
 
 // now set an event listener to the entire page
 document.addEventListener('click', event => {
@@ -198,9 +188,10 @@ document.addEventListener('click', event => {
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="rightChoice2">A: ${answers.answer3.a}</button>
+        <button class="wrongChoice2">A: ${answers.answer3.a}</button>
         <button class="wrongChoice2">B: ${answers.answer3.b}</button>
-        <button class="wrongChoice2">C: ${answers.answer3.c}</button>
+        <button class="rightChoice2">C: ${answers.answer3.c}</button>
+        <button class="wrongChoice2">D: ${answers.answer3.d}</button>
         `
     })
   } else if (event.target.classList.contains('rightChoice1')) {
@@ -222,9 +213,10 @@ document.addEventListener('click', event => {
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="rightChoice2">A: ${answers.answer3.a}</button>
+        <button class="wrongChoice2">A: ${answers.answer3.a}</button>
         <button class="wrongChoice2">B: ${answers.answer3.b}</button>
-        <button class="wrongChoice2">C: ${answers.answer3.c}</button>
+        <button class="rightChoice2">C: ${answers.answer3.c}</button>
+        <button class="wrongChoice2">D: ${answers.answer3.d}</button>
         `
     })
   }
@@ -232,7 +224,7 @@ document.addEventListener('click', event => {
 
 
 
-
+// =============================================
 
 
 document.addEventListener('click', event => {
@@ -261,6 +253,8 @@ document.addEventListener('click', event => {
 
     for (i = 0; i < userChoices.length; i++) {
 
+
+      // gives the user 100 points per correct answer
       if (userChoices[i] === 'correct') {
         score = score + 100
       }
@@ -281,7 +275,7 @@ document.addEventListener('click', event => {
       document.getElementById('count').innerHTML = ``
 
       document.getElementById('question').innerHTML = `
-      finished
+      All Finished!
       `
       document.getElementById('answers').innerHTML = `
       Great job! Your score is: ${score}
@@ -322,8 +316,8 @@ document.getElementById('viewScores').addEventListener('click', event => {
 
 function displayHisghscores() {
 
-
-
+  // populate the 'scores' element with the following html:
+  // this will put in a form for the user to input their initials for their score
   document.getElementById('scores').innerHTML = `
         <form>
         <p id="enterScore">
@@ -347,21 +341,21 @@ function displayHisghscores() {
   console.log(highScoreNames)
 
 
-  // first thing we do is grab the highScoreNames we already had or start with an empty array
+  // this starts the loop that will go through and input list elements for each of the PREVIOUS scores in the local storage
   for (i = 0; i < highScoreNames.length; i++) {
     let itemElem = document.createElement('li')
 
-
+    // this will assign the initials and scores to those list elemts
     itemElem.innerHTML = `
       ${highScoreNames[i].name}
       ${highScoreNames[i].score}
       `
+    // this appends those list elements to the 'highScores' element
     document.getElementById('highScores').append(itemElem)
   }
 
 
   // ````````````````~~~~~~~~~~~~~~~~~~~~~
-
 
 
   // listen for when the button is clicked and then do this function
@@ -400,12 +394,3 @@ function displayHisghscores() {
 }
 
 
-
-
-// later we will need to add local storage to store the answers
-
-// somehow we need to store correct answers
-
-// we will need to include a timer
-
-// find a way to make the timmer dynamic
