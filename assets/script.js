@@ -5,6 +5,8 @@ let questions = {
   question2: 'how old are you?',
   question3: 'Do you code?',
 }
+
+
 let answers = {
   answer1: {
     a: 'Devin',
@@ -35,11 +37,26 @@ let myInterval
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // when we click the start button, this event listener starts
 document.getElementById('start').addEventListener('click', event => {
-  event.preventDefault()
+  // event.preventDefault()
 
-  
+
 
   // lets try some time stuff
   // this will run the function every interval on miliseconds
@@ -70,7 +87,7 @@ document.getElementById('start').addEventListener('click', event => {
     }
   }, 1000)
 
- 
+
 
   document.getElementById('count').textContent = `
     ${count} Seconds
@@ -254,37 +271,125 @@ document.addEventListener('click', event => {
 
     // This logic is for the case when we click a list element with the class 'wrongChoice' and we want to execute the following
     if (count <= 0) {
-      
+
       console.log('works')
       clearInterval(myInterval)
-    
-    
-    
+
+
+
       document.getElementById('count').innerHTML = ``
-    
+
       document.getElementById('question').innerHTML = `
       finished
       `
       document.getElementById('answers').innerHTML = `
       Great job! Your score is: ${score}
       `
+
+
+      // moves count down by 1
+      if (count <= 0) {
+
+        console.log('works')
+        clearInterval(myInterval)
+
+
+
+        document.getElementById('count').innerHTML = ``
+
+        document.getElementById('question').innerHTML = `
+      finished
+      `
+        document.getElementById('answers').innerHTML = `
+      Great job! Your score is: ${score}
+      `
+      }
     }
 
-  }
-  
 
+
+
+
+    document.getElementById('scores').innerHTML = `
+        <form>
+        <p id="test">
+        <label for="initials">Enter your innitials:</label>
+        <input type="text" name="initials" id="initials">
+        </p>
+        <p>
+        <button id="addScore">Add Score!</button>
+        </p>
+        </form>
+        
+        <h1>High Scores:</h1>
+        <ul id="highScores"></ul>    
+        `
+
+
+    // ````````````````~~~~~~~~~~~~~~~~~~~~~
+
+    // set highScoreNames to whatever is in local storage OR an empty array
+    // let highScoreNames = JSON.parse(localStorage.getItem('highScoreNames')) || []
+
+
+    // // first thing we do is grab the highScoreNames we already had or start with an empty array
+    // for (i = 0; i < highScoreNames.length; i++) {
+    //   let itemElem = document.createElement('li')
+
+
+
+    //   itemElem.innerHTML = `
+    //     ${highScoreNames[i]}
+    //     `
+    //   document.getElementById('highsScores').append(itemElem)
+    // }
+
+
+    // ````````````````~~~~~~~~~~~~~~~~~~~~~
+
+
+
+    // listen for when the button is clicked and then do this function
+    document.getElementById('addScore').addEventListener('click', event => {
+      event.preventDefault()
+      console.log('hello')
+
+      let highScoreNames = [document.getElementById('initials').value]
+
+
+      // push the object into the array 'initials'
+      // highScoreNames.push(itemObj)
+
+
+      localStorage.setItem('highScoreNames', JSON.stringify(highScoreNames))
+
+
+      // create the type of html element we want
+      let itemElem = document.createElement('li')
+
+      // set its inner HTML
+      itemElem.innerHTML = `
+              ${document.getElementById('initials').value}
+              `
+
+      document.getElementById('test').innerHTML = ``
+
+      // add it to the ul by append
+      document.getElementById('highScores').append(itemElem)
+      // clear out the string
+      document.getElementById('initials').value = ''
+    })
+
+
+  }
 
 
 })
 
 
-console.log(count)
 
 
 
-
-
- 
 // later we will need to add local storage to store the answers
 
 // somehow we need to store correct answers
