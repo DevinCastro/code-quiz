@@ -50,8 +50,6 @@ let myInterval
 
 
 
-
-
 // when we click the start button, this event listener starts
 document.getElementById('start').addEventListener('click', event => {
   // event.preventDefault()
@@ -298,6 +296,27 @@ document.addEventListener('click', event => {
 
 })
 
+
+// ===========================================
+
+
+// Listen for someone to click the viewScores button and the display JUST the highscores
+document.getElementById('viewScores').addEventListener('click', event => {
+
+  // execute our displayHighScores function
+  displayHisghscores()
+  // clear out the other elements
+  document.getElementById('intro').innerHTML = ``
+  document.getElementById('question').innerHTML = ``
+  document.getElementById('answers').innerHTML = ``
+  document.getElementById('enterScore').parentNode.remove()
+
+
+})
+
+
+
+
 // ===========================================
 // function for displaying high scrores
 
@@ -307,7 +326,7 @@ function displayHisghscores() {
 
   document.getElementById('scores').innerHTML = `
         <form>
-        <p id="test">
+        <p id="enterScore">
         <label for="initials">Enter your innitials:</label>
         <input type="text" name="initials" id="initials">
         </p>
@@ -324,20 +343,21 @@ function displayHisghscores() {
   // ````````````````~~~~~~~~~~~~~~~~~~~~~
 
   // set highScoreNames to whatever is in local storage OR an empty array
-  // let highScoreNames = JSON.parse(localStorage.getItem('highScoreNames')) || []
+  let highScoreNames = JSON.parse(localStorage.getItem('highScoreNames')) || []
+  console.log(highScoreNames)
 
 
-  // // first thing we do is grab the highScoreNames we already had or start with an empty array
-  // for (i = 0; i < highScoreNames.length; i++) {
-  //   let itemElem = document.createElement('li')
+  // first thing we do is grab the highScoreNames we already had or start with an empty array
+  for (i = 0; i < highScoreNames.length; i++) {
+    let itemElem = document.createElement('li')
 
 
-
-  //   itemElem.innerHTML = `
-  //     ${highScoreNames[i]}
-  //     `
-  //   document.getElementById('highsScores').append(itemElem)
-  // }
+    itemElem.innerHTML = `
+      ${highScoreNames[i].name}
+      ${highScoreNames[i].score}
+      `
+    document.getElementById('highScores').append(itemElem)
+  }
 
 
   // ````````````````~~~~~~~~~~~~~~~~~~~~~
@@ -349,13 +369,13 @@ function displayHisghscores() {
     event.preventDefault()
     console.log('hello')
 
-    let highScoreNames = {
+    let highScoreNamesObj = {
       name: document.getElementById('initials').value,
       score: score,
     }
 
     // push the object into the array 'initials'
-    // highScoreNames.push(itemObj)
+    highScoreNames.push(highScoreNamesObj)
 
 
     localStorage.setItem('highScoreNames', JSON.stringify(highScoreNames))
@@ -366,11 +386,11 @@ function displayHisghscores() {
 
     // set its inner HTML
     itemElem.innerHTML = `
-              ${highScoreNames.name}
-              ${highScoreNames.score}
+              ${document.getElementById('initials').value}
+              ${score}
               `
 
-    document.getElementById('test').innerHTML = ``
+    document.getElementById('enterScore').innerHTML = ``
 
     // add it to the ul by append
     document.getElementById('highScores').append(itemElem)
