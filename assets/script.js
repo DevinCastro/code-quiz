@@ -14,8 +14,8 @@ let answers = {
     c: 'Christy',
   },
   answer2: {
-    a: '20',
-    b: '21',
+    a: '27',
+    b: '26',
     c: '22',
   },
   answer3: {
@@ -84,6 +84,9 @@ document.getElementById('start').addEventListener('click', event => {
       document.getElementById('answers').innerHTML = `
       Great job! Your score is: ${score}
       `
+
+      displayHisghscores()
+
     }
   }, 1000)
 
@@ -100,9 +103,9 @@ document.getElementById('start').addEventListener('click', event => {
   `
   // fill the answers element with the following html
   document.getElementById('answers').innerHTML = `
-      <li class="rightChoice">A: ${answers.answer1.a}</li>
-      <li class="wrongChoice">B: ${answers.answer1.b}</li>
-      <li class="wrongChoice">C: ${answers.answer1.c}</li>
+      <button class="rightChoice">A: ${answers.answer1.a}</button>
+      <button class="wrongChoice">B: ${answers.answer1.b}</button>
+      <button class="wrongChoice">C: ${answers.answer1.c}</button>
   `
 })
 
@@ -136,9 +139,9 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice1">A: ${answers.answer2.a}</li>
-        <li class="wrongChoice1">B: ${answers.answer2.b}</li>
-        <li class="wrongChoice1">C: ${answers.answer2.c}</li>
+        <button class="rightChoice1">A: ${answers.answer2.a}</button>
+        <button class="wrongChoice1">B: ${answers.answer2.b}</button>
+        <button class="wrongChoice1">C: ${answers.answer2.c}</button>
         `
     })
   } else if (event.target.classList.contains('rightChoice')) {
@@ -163,9 +166,9 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice1">A: ${answers.answer2.a}</li>
-        <li class="wrongChoice1">B: ${answers.answer2.b}</li>
-        <li class="wrongChoice1">C: ${answers.answer2.c}</li>
+        <button class="rightChoice1">A: ${answers.answer2.a}</button>
+        <button class="wrongChoice1">B: ${answers.answer2.b}</button>
+        <button class="wrongChoice1">C: ${answers.answer2.c}</button>
         `
     })
   }
@@ -197,9 +200,9 @@ document.addEventListener('click', event => {
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice2">A: ${answers.answer3.a}</li>
-        <li class="wrongChoice2">B: ${answers.answer3.b}</li>
-        <li class="wrongChoice2">C: ${answers.answer3.c}</li>
+        <button class="rightChoice2">A: ${answers.answer3.a}</button>
+        <button class="wrongChoice2">B: ${answers.answer3.b}</button>
+        <button class="wrongChoice2">C: ${answers.answer3.c}</button>
         `
     })
   } else if (event.target.classList.contains('rightChoice1')) {
@@ -221,9 +224,9 @@ document.addEventListener('click', event => {
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <li class="rightChoice2">A: ${answers.answer3.a}</li>
-        <li class="wrongChoice2">B: ${answers.answer3.b}</li>
-        <li class="wrongChoice2">C: ${answers.answer3.c}</li>
+        <button class="rightChoice2">A: ${answers.answer3.a}</button>
+        <button class="wrongChoice2">B: ${answers.answer3.b}</button>
+        <button class="wrongChoice2">C: ${answers.answer3.c}</button>
         `
     })
   }
@@ -286,31 +289,23 @@ document.addEventListener('click', event => {
       Great job! Your score is: ${score}
       `
 
-
-      // moves count down by 1
-      if (count <= 0) {
-
-        console.log('works')
-        clearInterval(myInterval)
-
-
-
-        document.getElementById('count').innerHTML = ``
-
-        document.getElementById('question').innerHTML = `
-      finished
-      `
-        document.getElementById('answers').innerHTML = `
-      Great job! Your score is: ${score}
-      `
-      }
     }
 
+    displayHisghscores()
+
+  }
+
+
+})
+
+// ===========================================
+// function for displaying high scrores
+
+function displayHisghscores() {
 
 
 
-
-    document.getElementById('scores').innerHTML = `
+  document.getElementById('scores').innerHTML = `
         <form>
         <p id="test">
         <label for="initials">Enter your innitials:</label>
@@ -326,66 +321,63 @@ document.addEventListener('click', event => {
         `
 
 
-    // ````````````````~~~~~~~~~~~~~~~~~~~~~
+  // ````````````````~~~~~~~~~~~~~~~~~~~~~
 
-    // set highScoreNames to whatever is in local storage OR an empty array
-    // let highScoreNames = JSON.parse(localStorage.getItem('highScoreNames')) || []
-
-
-    // // first thing we do is grab the highScoreNames we already had or start with an empty array
-    // for (i = 0; i < highScoreNames.length; i++) {
-    //   let itemElem = document.createElement('li')
+  // set highScoreNames to whatever is in local storage OR an empty array
+  // let highScoreNames = JSON.parse(localStorage.getItem('highScoreNames')) || []
 
 
-
-    //   itemElem.innerHTML = `
-    //     ${highScoreNames[i]}
-    //     `
-    //   document.getElementById('highsScores').append(itemElem)
-    // }
-
-
-    // ````````````````~~~~~~~~~~~~~~~~~~~~~
+  // // first thing we do is grab the highScoreNames we already had or start with an empty array
+  // for (i = 0; i < highScoreNames.length; i++) {
+  //   let itemElem = document.createElement('li')
 
 
 
-    // listen for when the button is clicked and then do this function
-    document.getElementById('addScore').addEventListener('click', event => {
-      event.preventDefault()
-      console.log('hello')
-
-      let highScoreNames = [document.getElementById('initials').value]
-
-
-      // push the object into the array 'initials'
-      // highScoreNames.push(itemObj)
+  //   itemElem.innerHTML = `
+  //     ${highScoreNames[i]}
+  //     `
+  //   document.getElementById('highsScores').append(itemElem)
+  // }
 
 
-      localStorage.setItem('highScoreNames', JSON.stringify(highScoreNames))
+  // ````````````````~~~~~~~~~~~~~~~~~~~~~
 
 
-      // create the type of html element we want
-      let itemElem = document.createElement('li')
 
-      // set its inner HTML
-      itemElem.innerHTML = `
-              ${document.getElementById('initials').value}
+  // listen for when the button is clicked and then do this function
+  document.getElementById('addScore').addEventListener('click', event => {
+    event.preventDefault()
+    console.log('hello')
+
+    let highScoreNames = {
+      name: document.getElementById('initials').value,
+      score: score,
+    }
+
+    // push the object into the array 'initials'
+    // highScoreNames.push(itemObj)
+
+
+    localStorage.setItem('highScoreNames', JSON.stringify(highScoreNames))
+
+
+    // create the type of html element we want
+    let itemElem = document.createElement('li')
+
+    // set its inner HTML
+    itemElem.innerHTML = `
+              ${highScoreNames.name}
+              ${highScoreNames.score}
               `
 
-      document.getElementById('test').innerHTML = ``
+    document.getElementById('test').innerHTML = ``
 
-      // add it to the ul by append
-      document.getElementById('highScores').append(itemElem)
-      // clear out the string
-      document.getElementById('initials').value = ''
-    })
+    // add it to the ul by append
+    document.getElementById('highScores').append(itemElem)
+    // clear out the string
+  })
 
-
-  }
-
-
-})
-
+}
 
 
 
