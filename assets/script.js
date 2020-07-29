@@ -89,10 +89,10 @@ document.getElementById('start').addEventListener('click', event => {
   `
   // fill the answers element with the following html
   document.getElementById('answers').innerHTML = `
-      <button class="wrongChoice">A: ${answers.answer1.a}</button>
-      <button class="wrongChoice">B: ${answers.answer1.b}</button>
-      <button class="rightChoice">C: ${answers.answer1.c}</button>
-      <button class="wrongChoice">D: ${answers.answer1.d}</button>
+      <button class="btn btn-info wrongChoice">A: ${answers.answer1.a}</button>
+      <button class="btn btn-info wrongChoice">B: ${answers.answer1.b}</button>
+      <button class="btn btn-info rightChoice">C: ${answers.answer1.c}</button>
+      <button class="btn btn-info wrongChoice">D: ${answers.answer1.d}</button>
   `
 })
 
@@ -120,7 +120,7 @@ document.addEventListener('click', event => {
     // reset the answers element with a "wrong" message and a button to move on to te next question
     document.getElementById('answers').innerHTML = `
     WRONG
-    <button id="next">Next</button>   
+    <button id="next" class="btn btn-secondary">Next</button>   
     `
 
     // listen for when the user clicks the next button and then start the next question!
@@ -129,10 +129,10 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="wrongChoice1">A: ${answers.answer2.a}</button>
-        <button class="wrongChoice1">B: ${answers.answer2.b}</button>
-        <button class="wrongChoice1">C: ${answers.answer2.c}</button>
-        <button class="rightChoice1">D: ${answers.answer2.d}</button>
+        <button class="btn btn-info wrongChoice1">A: ${answers.answer2.a}</button>
+        <button class="btn btn-info wrongChoice1">B: ${answers.answer2.b}</button>
+        <button class="btn btn-info wrongChoice1">C: ${answers.answer2.c}</button>
+        <button class="btn btn-info rightChoice1">D: ${answers.answer2.d}</button>
         `
     })
   } else if (event.target.classList.contains('rightChoice')) { //All this logic is exactly the same except this is the case they pick the correct answer
@@ -145,7 +145,7 @@ document.addEventListener('click', event => {
     // display a CORRECT message!
     document.getElementById('answers').innerHTML = `
     CORRECT!
-    <button id="next">Next</button> 
+    <button id="next" class="btn btn-secondary">Next</button> 
     `
 
     // start the next question
@@ -154,10 +154,10 @@ document.addEventListener('click', event => {
         ${questions.question2}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="wrongChoice1">A: ${answers.answer2.a}</button>
-        <button class="wrongChoice1">B: ${answers.answer2.b}</button>
-        <button class="wrongChoice1">C: ${answers.answer2.c}</button>
-        <button class="rightChoice1">D: ${answers.answer2.d}</button>
+        <button class="btn btn-info wrongChoice1">A: ${answers.answer2.a}</button>
+        <button class="btn btn-info wrongChoice1">B: ${answers.answer2.b}</button>
+        <button class="btn btn-info wrongChoice1">C: ${answers.answer2.c}</button>
+        <button class="btn btn-info rightChoice1">D: ${answers.answer2.d}</button>
         `
     })
   }
@@ -174,7 +174,7 @@ document.addEventListener('click', event => {
 
     document.getElementById('answers').innerHTML = `
     WRONG
-    <button id="next1">Next</button>   
+    <button id="next1" class="btn btn-secondary">Next</button>   
     `
 
     event.target.dataset.wrong = 'wrong'
@@ -188,17 +188,17 @@ document.addEventListener('click', event => {
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="wrongChoice2">A: ${answers.answer3.a}</button>
-        <button class="wrongChoice2">B: ${answers.answer3.b}</button>
-        <button class="rightChoice2">C: ${answers.answer3.c}</button>
-        <button class="wrongChoice2">D: ${answers.answer3.d}</button>
+        <button class="btn btn-info wrongChoice2">A: ${answers.answer3.a}</button>
+        <button class="btn btn-info wrongChoice2">B: ${answers.answer3.b}</button>
+        <button class="btn btn-info rightChoice2">C: ${answers.answer3.c}</button>
+        <button class="btn btn-info wrongChoice2">D: ${answers.answer3.d}</button>
         `
     })
   } else if (event.target.classList.contains('rightChoice1')) {
 
     document.getElementById('answers').innerHTML = `
     CORRECT!
-    <button id="next1">Next</button> 
+    <button id="next1" class="btn btn-secondary">Next</button> 
     `
 
     event.target.dataset.correct = 'correct'
@@ -212,10 +212,10 @@ document.addEventListener('click', event => {
         ${questions.question3}
         `
       document.getElementById('answers').innerHTML = `
-        <button class="wrongChoice2">A: ${answers.answer3.a}</button>
-        <button class="wrongChoice2">B: ${answers.answer3.b}</button>
-        <button class="rightChoice2">C: ${answers.answer3.c}</button>
-        <button class="wrongChoice2">D: ${answers.answer3.d}</button>
+        <button class="btn btn-info wrongChoice2">A: ${answers.answer3.a}</button>
+        <button class="btn btn-info wrongChoice2">B: ${answers.answer3.b}</button>
+        <button class="btn btn-info rightChoice2">C: ${answers.answer3.c}</button>
+        <button class="btn btn-info wrongChoice2">D: ${answers.answer3.d}</button>
         `
     })
   }
@@ -320,7 +320,7 @@ function displayHisghscores() {
         <input type="text" name="initials" id="initials">
         </p>
         <p>
-        <button id="addScore">Add Score!</button>
+        <button id="addScore" class="btn btn-secondary">Add Score!</button>
         </p>
         </form>
         
